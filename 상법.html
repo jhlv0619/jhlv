@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Random Sentence from Google Sheets&lt;/title&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Random Sentence from Sheets&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="sentence"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Google Sheets API 정보</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const SPREADSHEET_ID = '1ZF5OLLDtFNkzFmOQ1V_VjbSHyqZpS0gNg29KrGXoe98’;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const RANGE = 'A:A'; // A열의 모든 데이터를 가져옵니다.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const API_KEY = 'AIzaSyCCZ1BbDedY0bPNH56fvl_VTgv1XjyiuHM'; // Google API 콘솔에서 받은 API 키 입력</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Google Sheets에서 데이터 가져오기</p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function fetchData() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const response = await fetch(url);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const data = await response.json();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return data.values.flat(); // A열의 데이터를 배열로 반환</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 랜덤 문장 선택 후 HTML에 표시</p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function displayRandomSentence() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const sentences = await fetchData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const randomIndex = Math.floor(Math.random() * sentences.length);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('sentence').innerText = sentences[randomIndex];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 페이지 로드 시 랜덤 문장 표시</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = displayRandomSentence;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>

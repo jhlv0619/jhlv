@@ -47,7 +47,7 @@
             const sentences = await fetchData();
             const randomIndex = Math.floor(Math.random() * sentences.length);
             const sentence = sentences[randomIndex];
-            document.getElementById('sentence').innerText = `Sentence #${randomIndex + 1}: ${sentence}`;
+            document.getElementById('sentence').innerText = `${sentence} #${randomIndex + 1}`;
         }
 
         // 페이지 로드 시 랜덤 문장 표시
@@ -55,3 +55,4 @@
     </script>
 </body>
 </html>
+
